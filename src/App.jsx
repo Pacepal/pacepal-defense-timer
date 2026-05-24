@@ -1,167 +1,167 @@
 import { useEffect, useState } from 'react'
-import { CheckCircle2, Keyboard, Pause, Play, RotateCcw, Timer } from 'lucide-react'
+import { CheckCircle2, ChevronLeft, ChevronRight, Keyboard, Pause, Play, RotateCcw, Timer } from 'lucide-react'
 import './App.css'
 
 const SPLITS = [
   {
     id: 'p1',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
     title: 'Portada',
     duration: 20,
-    chips: ['Saludar', 'Pablo + Alejandro', 'Proyecto Agile Intermodular', 'Demo despues'],
+    chips: ['Saludar', 'Pablo + Alejandro', 'Proyecto Agile Intermodular', 'Demo después'],
     script:
-      'Buenos dias. Somos Pablo Sevillano y Alejandro Pacheco, del IES Infanta Elena, de segundo de DAW. Hoy presentamos PacePal, nuestro Proyecto Agile Intermodular del curso 2025-2026. En esta primera parte vamos a explicar el proyecto mediante las diapositivas: que se nos pedia, como lo organizamos y como lo resolvimos. Despues haremos la demo practica con la aplicacion, el codigo y la base de datos.',
+      'Buenos días. Somos Pablo Sevillano y Alejandro Pacheco, del IES Infanta Elena, de segundo de DAW. Hoy presentamos PacePal, nuestro Proyecto Agile Intermodular del curso 2025-2026. En esta primera parte vamos a explicar el proyecto mediante las diapositivas: qué se nos pedía, cómo lo organizamos y cómo lo resolvimos. Después haremos la demo práctica con la aplicación, el código y la base de datos.',
   },
   {
     id: 'p2',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
-    title: 'Quienes somos',
+    title: 'Quiénes somos',
     duration: 50,
     chips: ['Treecore = marco', 'PacePal: Pablo + Alejandro', 'Ouiam no intervino', 'Roles flexibles'],
     script:
-      'Esta diapositiva muestra Treecore Studio, que es el marco profesional con el que damos coherencia al proyecto. Treecore como estudio tiene tres perfiles, pero PacePal, como proyecto academico concreto, lo hemos desarrollado Alejandro y yo. Ouiam forma parte de Treecore Studio, pero no ha intervenido en este proyecto. Lo aclaramos porque la diapositiva representa el marco profesional, no el reparto real de trabajo de PacePal. Al ser dos personas, no hemos trabajado con roles totalmente cerrados. Hemos ido alternando responsabilidades segun cada fase: analisis, documentacion, diseno, desarrollo, pruebas y preparacion de defensa.',
+      'Esta diapositiva muestra Treecore Studio, que es el marco profesional con el que damos coherencia al proyecto. Treecore como estudio tiene tres perfiles, pero PacePal, como proyecto académico concreto, lo hemos desarrollado Alejandro y yo. Ouiam forma parte de Treecore Studio, pero no ha intervenido en este proyecto. Lo aclaramos porque la diapositiva representa el marco profesional, no el reparto real de trabajo de PacePal. Al ser dos personas, no hemos trabajado con roles totalmente cerrados. Hemos ido alternando responsabilidades según cada fase: análisis, documentación, diseño, desarrollo, pruebas y preparación de defensa.',
   },
   {
     id: 'p3',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
-    title: 'Que es PacePal',
+    title: 'Qué es PacePal',
     duration: 45,
     chips: ['Plataforma deportiva', 'Rutas reales', 'Comunidad', 'Tienda integrada'],
     script:
-      'PacePal es una plataforma web que conecta a personas a traves del deporte y las rutas reales. Tiene tres pilares principales. El primero son las rutas reales: recorridos con informacion util como distancia, dificultad y tipo de ruta. El segundo es la comunidad: usuarios que pueden crear actividades deportivas sobre esas rutas y unirse a actividades de otros. Y el tercero es la tienda: productos deportivos relacionados, con una logica de catalogo, carrito y pedidos.',
+      'PacePal es una plataforma web que conecta a personas a través del deporte y las rutas reales. Tiene tres pilares principales. El primero son las rutas reales: recorridos con información útil como distancia, dificultad y tipo de ruta. El segundo es la comunidad: usuarios que pueden crear actividades deportivas sobre esas rutas y unirse a actividades de otros. Y el tercero es la tienda: productos deportivos relacionados, con una lógica de catálogo, carrito y pedidos.',
   },
   {
     id: 'p4',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
     title: 'Problema que resuelve',
     duration: 50,
-    chips: ['Deporte acompanado', 'Rutas seguras', 'Motivacion', 'Hueco entre tracking y grupos'],
+    chips: ['Deporte acompañado', 'Rutas seguras', 'Motivación', 'Hueco entre tracking y grupos'],
     script:
-      'PacePal nace para hacer mas facil, seguro y social salir a correr o caminar. Detectamos varios problemas habituales: falta de rutas adecuadas o seguras, poca motivacion para mantener la constancia, preocupacion por entrenar solo, dificultad para encontrar companeros o actividades, y falta de seguimiento u objetivos claros. Hay aplicaciones muy buenas para medir rendimiento o consultar mapas, pero muchas no estan pensadas para crear actividades deportivas sencillas sobre rutas concretas.',
+      'PacePal nace para hacer más fácil, seguro y social salir a correr o caminar. Detectamos varios problemas habituales: falta de rutas adecuadas o seguras, poca motivación para mantener la constancia, preocupación por entrenar solo, dificultad para encontrar compañeros o actividades, y falta de seguimiento u objetivos claros. Hay aplicaciones muy buenas para medir rendimiento o consultar mapas, pero muchas no están pensadas para crear actividades deportivas sencillas sobre rutas concretas.',
   },
   {
     id: 'p5',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
-    title: 'Como funciona PacePal',
+    title: 'Cómo funciona PacePal',
     duration: 45,
-    chips: ['Explorar ruta', 'Crear actividad', 'Compartir experiencia', 'Demo despues'],
+    chips: ['Explorar ruta', 'Crear actividad', 'Compartir experiencia', 'Demo después'],
     script:
-      'El funcionamiento se resume en tres pasos. Primero, el usuario explora una ruta. Puede consultar recorridos segun distancia, dificultad y tipo de ruta, filtrar, comparar y elegir una opcion adecuada. Segundo, crea una actividad. Define fecha, hora, nivel del grupo y ritmo aproximado. Y tercero, comparte la experiencia: otros usuarios pueden descubrir esa actividad, unirse y participar en una experiencia comun.',
+      'El funcionamiento se resume en tres pasos. Primero, el usuario explora una ruta. Puede consultar recorridos según distancia, dificultad y tipo de ruta, filtrar, comparar y elegir una opción adecuada. Segundo, crea una actividad. Define fecha, hora, nivel del grupo y ritmo aproximado. Y tercero, comparte la experiencia: otros usuarios pueden descubrir esa actividad, unirse y participar en una experiencia común.',
   },
   {
     id: 'p6',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
     title: 'Ruta vs Actividad',
     duration: 45,
-    chips: ['Ruta = recorrido base', 'Actividad = plan social', 'Reutilizacion', 'Modelo mas claro'],
+    chips: ['Ruta = recorrido base', 'Actividad = plan social', 'Reutilización', 'Modelo más claro'],
     script:
-      'Esta fue una de las decisiones funcionales mas importantes del proyecto. La ruta es el recorrido base que ya existe en la plataforma. Tiene distancia, dificultad, desnivel y tipo de ruta. Se puede consultar y reutilizar muchas veces. La actividad, en cambio, es el plan social que ocurre sobre una ruta concreta. Anade los datos variables: fecha, hora, nivel del grupo y ritmo aproximado.',
+      'Esta fue una de las decisiones funcionales más importantes del proyecto. La ruta es el recorrido base que ya existe en la plataforma. Tiene distancia, dificultad, desnivel y tipo de ruta. Se puede consultar y reutilizar muchas veces. La actividad, en cambio, es el plan social que ocurre sobre una ruta concreta. Añade los datos variables: fecha, hora, nivel del grupo y ritmo aproximado.',
   },
   {
     id: 'p7',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
-    title: 'Organizacion por sprints',
+    title: 'Organización por sprints',
     duration: 50,
-    chips: ['Scrum educativo', 'Sprint 0 planificacion', 'Sprint 2 API/BD', 'Sprint 3 React'],
+    chips: ['Scrum educativo', 'Sprint 0 planificación', 'Sprint 2 API/BD', 'Sprint 3 React'],
     script:
-      'Organizamos el proyecto en cuatro sprints, adaptando Scrum al contexto educativo. No fue un Scrum empresarial rigido, sino una forma de ordenar el trabajo por fases, revisar avances y corregir decisiones cuando el producto evolucionaba. Sprint 0: planificacion, roles y backlog. Sprint 1: landing, diseno y formularios. Sprint 2: API, base de datos, carrito, buscador y roles. Sprint 3: migracion a React e integracion final.',
+      'Organizamos el proyecto en cuatro sprints, adaptando Scrum al contexto educativo. No fue un Scrum empresarial rígido, sino una forma de ordenar el trabajo por fases, revisar avances y corregir decisiones cuando el producto evolucionaba. Sprint 0: planificación, roles y backlog. Sprint 1: landing, diseño y formularios. Sprint 2: API, base de datos, carrito, buscador y roles. Sprint 3: migración a React e integración final.',
   },
   {
     id: 'p8',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Pablo',
-    title: 'Stack tecnologico',
+    title: 'Stack tecnológico',
     duration: 45,
     chips: ['React + Vite', 'SPA responsive', 'PHP API REST', 'MySQL/MariaDB'],
     script:
-      'El stack se organiza en cuatro bloques. En frontend usamos React 18 con Vite y Bootstrap para construir una interfaz responsive organizada como SPA. React no fue una eleccion libre empresarial, sino parte del objetivo tecnico del Sprint 3: separacion clara entre cliente y servidor, componentes y consumo de API. En backend usamos PHP, API REST y PDO. La base de datos es MySQL/MariaDB.',
+      'El stack se organiza en cuatro bloques. En frontend usamos React 18 con Vite y Bootstrap para construir una interfaz responsive organizada como SPA. React no fue una elección libre empresarial, sino parte del objetivo técnico del Sprint 3: separación clara entre cliente y servidor, componentes y consumo de API. En backend usamos PHP, API REST y PDO. La base de datos es MySQL/MariaDB.',
   },
   {
     id: 'p9',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
-    title: 'Diseno y accesibilidad',
+    title: 'Diseño y accesibilidad',
     duration: 50,
-    chips: ['Responsive', 'Guia de estilos', 'Foco visible', 'Lighthouse/WAVE'],
+    chips: ['Responsive', 'Guía de estilos', 'Foco visible', 'Lighthouse/WAVE'],
     script:
-      'En diseno y accesibilidad trabajamos cuatro bloques: responsive real, guia de estilos, accesibilidad y auditoria tecnica. La interfaz se adapta a escritorio, tablet y movil. La guia mantiene paleta PacePal, tipografia Inter y componentes coherentes. En accesibilidad trabajamos foco visible, contraste suficiente, jerarquia clara y navegacion comprensible.',
+      'En diseño y accesibilidad trabajamos cuatro bloques: responsive real, guía de estilos, accesibilidad y auditoría técnica. La interfaz se adapta a escritorio, tablet y móvil. La guía mantiene paleta PacePal, tipografía Inter y componentes coherentes. En accesibilidad trabajamos foco visible, contraste suficiente, jerarquía clara y navegación comprensible.',
   },
   {
     id: 'p10',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
     title: 'Frontend: React y experiencia de usuario',
     duration: 45,
     chips: ['Componentes', 'Vistas', 'Sin recarga completa', 'JS modular previo'],
     script:
-      'El frontend es la capa visual e interactiva de PacePal. Con React organizamos la interfaz en componentes y vistas, separando actividades, rutas, tienda, usuario y administracion. La navegacion es fluida porque la SPA permite moverse entre vistas sin recargas completas. Veniamos de una base previa con JavaScript modular y la migracion a React permitio ordenar esa logica.',
+      'El frontend es la capa visual e interactiva de PacePal. Con React organizamos la interfaz en componentes y vistas, separando actividades, rutas, tienda, usuario y administración. La navegación es fluida porque la SPA permite moverse entre vistas sin recargas completas. Veníamos de una base previa con JavaScript modular y la migración a React permitió ordenar esa lógica.',
   },
   {
     id: 'p11',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
     title: 'Backend: API REST en PHP',
     duration: 50,
     chips: ['PHP API', 'JSON', 'PDO', 'Sesiones y roles'],
     script:
-      'El backend es la logica de servidor que conecta datos, sesiones y permisos. React realiza solicitudes al servidor y la API REST en PHP responde con JSON. PHP gestiona endpoints, valida datos, comprueba sesion, controla roles y consulta la base de datos mediante PDO. El uso de PDO permite trabajar con consultas preparadas.',
+      'El backend es la lógica de servidor que conecta datos, sesiones y permisos. React realiza solicitudes al servidor y la API REST en PHP responde con JSON. PHP gestiona endpoints, valida datos, comprueba sesión, controla roles y consulta la base de datos mediante PDO. El uso de PDO permite trabajar con consultas preparadas.',
   },
   {
     id: 'p12',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
     title: 'Base de datos: modelo relacional',
     duration: 45,
-    chips: ['Usuarios', 'Rutas/actividades', 'Productos/articulos', 'Pedidos/detalle'],
+    chips: ['Usuarios', 'Rutas/actividades', 'Productos/artículos', 'Pedidos/detalle'],
     script:
       'La base de datos guarda usuarios, rutas, actividades, productos y pedidos. El modelo resume las entidades principales y conecta personas, rutas, actividades y compras de forma coherente. La parte de tienda se resuelve con productos, pedidos y detalle de pedido, conservando cantidad y precio unitario en el momento de la compra.',
   },
   {
     id: 'p13',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
     title: 'Arquitectura y API REST',
     duration: 50,
     chips: ['React', 'Fetch/JSON', 'PHP', 'PDO/MySQL'],
     script:
-      'Esta diapositiva resume la arquitectura completa. React se encarga de componentes, vistas y eventos. Cuando necesita datos, hace peticiones mediante Fetch. La comunicacion viaja en JSON. PHP recibe esas peticiones, aplica validacion y logica de servidor, y accede a MySQL mediante PDO. La clave es la separacion de responsabilidades.',
+      'Esta diapositiva resume la arquitectura completa. React se encarga de componentes, vistas y eventos. Cuando necesita datos, hace peticiones mediante Fetch. La comunicación viaja en JSON. PHP recibe esas peticiones, aplica validación y lógica de servidor, y accede a MySQL mediante PDO. La clave es la separación de responsabilidades.',
   },
   {
     id: 'p14',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
     title: 'Herramientas, despliegue y evidencias',
     duration: 45,
-    chips: ['XAMPP completo', 'GitHub Pages estatico', 'Postman', 'Evidencias'],
+    chips: ['XAMPP completo', 'GitHub Pages estático', 'Postman', 'Evidencias'],
     script:
-      'Para desarrollar, documentar y probar el proyecto usamos varias herramientas. XAMPP nos da el entorno local para Apache, PHP y MySQL. GitHub permite control de versiones. GitHub Pages se usa como publicacion del frontend y apoyo visual, pero no ejecuta PHP ni MySQL. Postman valida endpoints y la documentacion recoge memoria, backlog, guias y evidencias.',
+      'Para desarrollar, documentar y probar el proyecto usamos varias herramientas. XAMPP nos da el entorno local para Apache, PHP y MySQL. GitHub permite control de versiones. GitHub Pages se usa como publicación del frontend y apoyo visual, pero no ejecuta PHP ni MySQL. Postman valida endpoints y la documentación recoge memoria, backlog, guías y evidencias.',
   },
   {
     id: 'p15',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
-    title: 'Codigo, conclusiones y futuro',
+    title: 'Código, conclusiones y futuro',
     duration: 50,
     chips: ['Fetch + JSON', 'Objetivos alcanzados', 'Despliegue real', 'Mejoras futuras'],
     script:
-      'Esta diapositiva resume codigo clave, objetivos alcanzados y futuro. La diapositiva muestra fragmentos del codigo de integracion: React solicita datos con Fetch, PHP responde en JSON y la base de datos mantiene la persistencia. Como objetivos alcanzados, tenemos una aplicacion funcional e integrada, con rutas, actividades, tienda y administracion.',
+      'Esta diapositiva resume código clave, objetivos alcanzados y futuro. La diapositiva muestra fragmentos del código de integración: React solicita datos con Fetch, PHP responde en JSON y la base de datos mantiene la persistencia. Como objetivos alcanzados, tenemos una aplicación funcional e integrada, con rutas, actividades, tienda y administración.',
   },
   {
     id: 'p16',
-    phase: 'Presentacion',
+    phase: 'Presentación',
     speaker: 'Alejandro',
     title: 'Gracias / paso a demo',
     duration: 20,
-    chips: ['Cerrar presentacion', 'Paso a demo', 'App + codigo + BD'],
+    chips: ['Cerrar presentación', 'Paso a demo', 'App + código + BD'],
     script:
-      'Muchas gracias. Con esto termina la parte de presentacion. A continuacion pasamos a la demo practica, donde ensenaremos la aplicacion funcionando, la conexion con la API, la base de datos, algunas partes concretas del codigo y las pruebas que justifican lo que acabamos de explicar.',
+      'Muchas gracias. Con esto termina la parte de presentación. A continuación pasamos a la demo práctica, donde enseñaremos la aplicación funcionando, la conexión con la API, la base de datos, algunas partes concretas del código y las pruebas que justifican lo que acabamos de explicar.',
   },
   {
     id: 'd1',
@@ -169,19 +169,19 @@ const SPLITS = [
     speaker: 'Pablo',
     title: 'Contexto local XAMPP vs GitHub Pages',
     duration: 25,
-    chips: ['Version completa local', 'XAMPP', 'PHP + MySQL', 'GitHub Pages estatico'],
+    chips: ['Versión completa local', 'XAMPP', 'PHP + MySQL', 'GitHub Pages estático'],
     script:
-      'Ahora vamos a ensenar la version completa funcionando en local con XAMPP, PHP y MySQL. GitHub Pages nos sirve como escaparate estatico del frontend, pero la integracion completa necesita la API PHP y la base de datos activa.',
+      'Ahora vamos a enseñar la versión completa funcionando en local con XAMPP, PHP y MySQL. GitHub Pages nos sirve como escaparate estático del frontend, pero la integración completa necesita la API PHP y la base de datos activa.',
   },
   {
     id: 'd2',
     phase: 'Demo',
     speaker: 'Alejandro',
-    title: 'Recorrido visual rapido',
+    title: 'Recorrido visual rápido',
     duration: 45,
     chips: ['Home', 'Rutas', 'Actividades', 'Tienda'],
     script:
-      'Hago un recorrido rapido por home, rutas, actividades y tienda para situar el producto antes de entrar en un caso concreto. Aqui se ve que PacePal no es solo una pantalla, sino una aplicacion con secciones funcionales conectadas.',
+      'Hago un recorrido rápido por home, rutas, actividades y tienda para situar el producto antes de entrar en un caso concreto. Aquí se ve que PacePal no es solo una pantalla, sino una aplicación con secciones funcionales conectadas.',
   },
   {
     id: 'd3',
@@ -191,17 +191,17 @@ const SPLITS = [
     duration: 50,
     chips: ['Actividad verificada', 'Ruta base', 'Plan social', 'No depender de ID fijo'],
     script:
-      'Ahora abro una actividad existente verificada antes de empezar. Aqui se ve la diferencia entre una ruta base y una actividad concreta creada sobre esa ruta. La ruta es el recorrido estable; la actividad es el plan social que ocurre sobre ella.',
+      'Ahora abro una actividad existente verificada antes de empezar. Aquí se ve la diferencia entre una ruta base y una actividad concreta creada sobre esa ruta. La ruta es el recorrido estable; la actividad es el plan social que ocurre sobre ella.',
   },
   {
     id: 'd4',
     phase: 'Demo',
     speaker: 'Pablo',
-    title: 'Login y sesion PHP',
+    title: 'Login y sesión PHP',
     duration: 50,
-    chips: ['Usuario verificado', 'Sesion PHP', 'Cookie navegador', 'React consulta estado'],
+    chips: ['Usuario verificado', 'Sesión PHP', 'Cookie navegador', 'React consulta estado'],
     script:
-      'Ahora entro con un usuario verificado solo para esta defensa. La sesion real la gestiona PHP en servidor; el navegador conserva la cookie de sesion y React consulta el estado con el endpoint de sesion.',
+      'Ahora entro con un usuario verificado solo para esta defensa. La sesión real la gestiona PHP en servidor; el navegador conserva la cookie de sesión y React consulta el estado con el endpoint de sesión.',
   },
   {
     id: 'd5',
@@ -209,19 +209,19 @@ const SPLITS = [
     speaker: 'Alejandro',
     title: 'Tienda y carrito',
     duration: 50,
-    chips: ['Producto con stock', 'Anadir al carrito', 'Contador', 'Total'],
+    chips: ['Producto con stock', 'Añadir al carrito', 'Contador', 'Total'],
     script:
-      'Paso por tienda, anado un producto con stock verificado y enseno contador y total. Con esto cubrimos el requisito de carrito o seleccion temporal sin convertir la demo en una compra completa.',
+      'Paso por tienda, añado un producto con stock verificado y enseño contador y total. Con esto cubrimos el requisito de carrito o selección temporal sin convertir la demo en una compra completa.',
   },
   {
     id: 'd6',
     phase: 'Demo',
     speaker: 'Pablo',
-    title: 'Panel admin / rol / gestion',
+    title: 'Panel admin / rol / gestión',
     duration: 50,
-    chips: ['Admin', 'Rol', 'Zona de gestion', 'No CRUD largo'],
+    chips: ['Admin', 'Rol', 'Zona de gestión', 'No CRUD largo'],
     script:
-      'Ahora entro en el panel de administracion. Aqui se ve que el rol no solo cambia el menu, sino que permite acceder a datos y acciones de gestion. No vamos a hacer un CRUD largo en directo porque no aporta tiempo, pero si ensenar que existe la zona de gestion separada del usuario normal.',
+      'Ahora entro en el panel de administración. Aquí se ve que el rol no solo cambia el menú, sino que permite acceder a datos y acciones de gestión. No vamos a hacer un CRUD largo en directo porque no aporta tiempo, pero sí enseñar que existe la zona de gestión separada del usuario normal.',
   },
   {
     id: 'd7',
@@ -231,17 +231,17 @@ const SPLITS = [
     duration: 50,
     chips: ['GET /api/session', 'logged true', 'rol admin', 'No es solo visual'],
     script:
-      'Ahora enseno una comprobacion tecnica rapida: el endpoint de sesion. Si devuelve logged true y rol admin, se ve que no es solo un cambio visual en React, sino que PHP reconoce la sesion del usuario.',
+      'Ahora enseño una comprobación técnica rápida: el endpoint de sesión. Si devuelve logged true y rol admin, se ve que no es solo un cambio visual en React, sino que PHP reconoce la sesión del usuario.',
   },
   {
     id: 'd8',
     phase: 'Demo',
     speaker: 'Alejandro',
-    title: 'Codigo clave',
+    title: 'Código clave',
     duration: 80,
     chips: ['App.jsx SPA', 'api.js fetch', 'useSession', 'index.php', 'AuthController'],
     script:
-      'Ahora enseno los cinco archivos clave. App.jsx para SPA y navegacion por hash; api.js para fetch, JSON y credentials include; useSession.js para consulta de sesion; src/api/index.php como entrada de API; y AuthController.php para login, sesion y logout.',
+      'Ahora enseño los cinco archivos clave. App.jsx para SPA y navegación por hash; api.js para fetch, JSON y credentials include; useSession.js para consulta de sesión; src/api/index.php como entrada de API; y AuthController.php para login, sesión y logout.',
   },
   {
     id: 'd9',
@@ -249,9 +249,9 @@ const SPLITS = [
     speaker: 'Pablo',
     title: 'Base de datos',
     duration: 45,
-    chips: ['Usuarios', 'Actividades', 'Participaciones', 'Articulos'],
+    chips: ['Usuarios', 'Actividades', 'Participaciones', 'Artículos'],
     script:
-      'Cierro la parte tecnica ensenando que los datos existen en MySQL. No voy a hacer una explicacion larga de SQL: solo tres consultas para ver usuarios, actividad y participaciones, y articulos.',
+      'Cierro la parte técnica enseñando que los datos existen en MySQL. No voy a hacer una explicación larga de SQL: solo tres consultas para ver usuarios, actividad y participaciones, y artículos.',
   },
   {
     id: 'd10',
@@ -261,7 +261,7 @@ const SPLITS = [
     duration: 25,
     chips: ['Camino completo', 'React', 'API PHP', 'MySQL'],
     script:
-      'En la demo se ha visto el camino completo: interfaz React, API PHP, sesion y rol, y persistencia en MySQL. Con esto cerramos la parte practica y quedamos a disposicion de las preguntas.',
+      'En la demo se ha visto el camino completo: interfaz React, API PHP, sesión y rol, y persistencia en MySQL. Con esto cerramos la parte práctica y quedamos a disposición de las preguntas.',
   },
 ]
 
@@ -309,6 +309,13 @@ function statusLabel(status, delta) {
   if (status === 'perfect') return `Clavado ${formatDelta(delta)}`
   if (status === 'good') return `Bien ${formatDelta(delta)}`
   return `Fuera ${formatDelta(delta)}`
+}
+
+function buildBaseSealedTimes(untilIndex) {
+  return SPLITS_WITH_TARGETS.slice(0, untilIndex).reduce((accumulator, split, index) => {
+    accumulator[index] = split.targetAccumulated
+    return accumulator
+  }, {})
 }
 
 export default function App() {
@@ -386,6 +393,36 @@ export default function App() {
     setActiveIndex(index)
   }
 
+  function repositionToSplit(index, mode = 'actual') {
+    const safeIndex = Math.max(0, Math.min(index, SPLITS_WITH_TARGETS.length - 1))
+    const nextSealedTimes =
+      mode === 'base'
+        ? buildBaseSealedTimes(safeIndex)
+        : Object.fromEntries(Object.entries(sealedTimes).filter(([splitIndex]) => Number(splitIndex) < safeIndex))
+
+    const nextElapsed =
+      safeIndex === 0
+        ? 0
+        : mode === 'base'
+          ? SPLITS_WITH_TARGETS[safeIndex - 1].targetAccumulated
+          : (nextSealedTimes[safeIndex - 1] ?? SPLITS_WITH_TARGETS[safeIndex - 1].targetAccumulated)
+
+    setSealedTimes(nextSealedTimes)
+    setElapsed(nextElapsed)
+    setActiveIndex(safeIndex)
+    setIsRunning(false)
+  }
+
+  function stepToPreviousSplit() {
+    if (activeIndex <= 0) return
+    repositionToSplit(activeIndex - 1, 'actual')
+  }
+
+  function stepToNextSplit() {
+    if (activeIndex >= SPLITS_WITH_TARGETS.length - 1) return
+    repositionToSplit(activeIndex + 1, 'actual')
+  }
+
   const pabloElapsed = SPLITS_WITH_TARGETS.reduce((sum, split, index) => {
     if (split.speaker !== 'Pablo') return sum
     const sealed = sealedTimes[index]
@@ -431,22 +468,30 @@ export default function App() {
         </header>
 
         <section className="summary-grid">
-          <article className="summary-card">
-            <span className="summary-label">Etapa actual</span>
-            <strong className="summary-value">{formatTime(activeElapsed)}</strong>
-          </article>
-          <article className="summary-card">
-            <span className="summary-label">Presentacion base</span>
-            <strong className="summary-value">{formatTime(PRESENTATION_TARGET)}</strong>
-          </article>
-          <article className="summary-card">
-            <span className="summary-label">Defensa base</span>
-            <strong className="summary-value">{formatTime(totalTarget)}</strong>
-          </article>
+          <div className="summary-column">
+            <article className="summary-card">
+              <span className="summary-label">Etapa actual</span>
+              <strong className="summary-value">{formatTime(activeElapsed)}</strong>
+            </article>
+            <article className="summary-card">
+              <span className="summary-label">Duración etapa</span>
+              <strong className="summary-value">{formatTime(activeTargetDuration)}</strong>
+            </article>
+          </div>
+          <div className="summary-column">
+            <article className="summary-card">
+              <span className="summary-label">Presentación base</span>
+              <strong className="summary-value">{formatTime(PRESENTATION_TARGET)}</strong>
+            </article>
+            <article className="summary-card">
+              <span className="summary-label">Defensa base</span>
+              <strong className="summary-value">{formatTime(totalTarget)}</strong>
+            </article>
+          </div>
         </section>
 
         <section className="chips-panel">
-          <h2 className="section-title">Ideas rapidas</h2>
+          <h2 className="section-title">Ideas rápidas</h2>
           <div className="chip-list">
             {(activeSplit?.chips ?? ['Respirar', 'Cerrar', 'Preguntas']).map((chip) => (
               <span className="chip" key={chip}>
@@ -476,6 +521,16 @@ export default function App() {
           <button type="button" className="control-button control-primary" onClick={sealCurrentSplit}>
             <CheckCircle2 size={18} />
             Sellar etapa
+          </button>
+
+          <button type="button" className="control-button control-secondary" onClick={stepToPreviousSplit}>
+            <ChevronLeft size={18} />
+            Etapa anterior
+          </button>
+
+          <button type="button" className="control-button control-secondary" onClick={stepToNextSplit}>
+            <ChevronRight size={18} />
+            Siguiente
           </button>
 
           <button type="button" className="control-button control-muted" onClick={resetTimer}>
@@ -525,6 +580,7 @@ export default function App() {
                 <th>Responsable</th>
                 <th>Actual</th>
                 <th>Base</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -559,6 +615,30 @@ export default function App() {
                       </div>
                     </td>
                     <td className="table-time">{formatTime(split.targetAccumulated)}</td>
+                    <td>
+                      <div className="table-actions">
+                        <button
+                          type="button"
+                          className="row-action-button row-action-actual"
+                          onClick={(event) => {
+                            event.stopPropagation()
+                            repositionToSplit(index, 'actual')
+                          }}
+                        >
+                          Retomar aquí
+                        </button>
+                        <button
+                          type="button"
+                          className="row-action-button row-action-base"
+                          onClick={(event) => {
+                            event.stopPropagation()
+                            repositionToSplit(index, 'base')
+                          }}
+                        >
+                          Base aquí
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 )
               })}

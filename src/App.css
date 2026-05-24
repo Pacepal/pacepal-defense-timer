@@ -204,7 +204,12 @@ select {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.summary-column {
+  display: grid;
   gap: 14px;
 }
 
@@ -335,6 +340,12 @@ select {
 .control-primary {
   background: var(--blue-alejandro);
   color: #fff;
+}
+
+.control-secondary {
+  background: rgba(42, 64, 10, 0.08);
+  color: var(--green-dark);
+  border-color: rgba(42, 64, 10, 0.14);
 }
 
 .control-muted {
@@ -636,6 +647,45 @@ select {
   color: var(--blue-alejandro);
 }
 
+.table-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 118px;
+}
+
+.row-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.row-action-button:hover {
+  transform: translateY(-1px);
+}
+
+.row-action-actual {
+  border-color: rgba(23, 61, 122, 0.22);
+  color: var(--blue-alejandro);
+  background: rgba(23, 61, 122, 0.08);
+}
+
+.row-action-base {
+  border-color: rgba(93, 140, 22, 0.24);
+  color: var(--green-dark);
+  background: rgba(161, 242, 39, 0.18);
+}
+
 .legend-card {
   padding: 14px 16px;
 }
@@ -707,6 +757,10 @@ select {
   }
 
   .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-column {
     grid-template-columns: 1fr;
   }
 
